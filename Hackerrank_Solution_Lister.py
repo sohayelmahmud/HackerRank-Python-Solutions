@@ -22,6 +22,9 @@ subdomain_name = ""
 extension = ".py"
 output_file_name = "solution_list.html"
 
+# স্থায়ীভাবে এই ভ্যারিয়েবলটি যোগ করা হলো
+base_path = "Python/"
+
 try:
     info_file = open(info_file_name, "r")
     info_file_lines = info_file.readlines()
@@ -48,6 +51,7 @@ while i < len(info_file_lines):
             if line2.startswith("["):
                 problem_list = line2
 
+                # --- ফোল্ডার এবং ফাইলপাথ তৈরি ---
                 folder_count += 1
                 folder_serial = f'{folder_count:02d}'
 
@@ -56,6 +60,7 @@ while i < len(info_file_lines):
 
                 title_ar = re.findall(r'("[^"]*")', problem_list)
 
+                # HTML আউটপুট
                 f.write("\n\n- **" + subdomain_name + "**\n")
 
                 for idx, title in enumerate(title_ar):
@@ -65,8 +70,10 @@ while i < len(info_file_lines):
 
                     filename_with_serial = f'{file_serial}_{filename_base}'
 
-                    filepath = folder_name + "/" + filename_with_serial + extension
+                    # 🌟 পরিবর্তন: filepath এর শুরুতে base_path ("Python/") যোগ করা হয়েছে
+                    filepath = base_path + folder_name + "/" + filename_with_serial + extension
 
+                    # HTML লিংক লেখা
                     f.write("   - [" + title[1:-1] + "](" + filepath + ")\n")
 
                 i += 2
