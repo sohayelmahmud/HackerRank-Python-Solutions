@@ -1,30 +1,32 @@
 """
-Title     : Hackerrank Solution Lister
-Subdomain : None
-Domain    : None
-Author    : Ahmedur Rahman Shovon
-Created   : 15 July 2017
+Title                : Hackerrank_Solution_Lister
+Subdomain            : None
+Domain               : None
+Original Author      : Ahmedur Rahman Shovon
+Modified Author      : Sohayel Mahmud
+Date of Creation     : 12 July 2017
+Date of Modification : 24 June 2024
 """
 
 import os
 import re
 import sys
 
-info_file_name = "python_info.txt"
+info_file_name = "python_info.txt" # Adjust this path as needed
 
-
+# valid name generator
 def get_valid_name(given_name):
     return re.sub(r"[^\w]", "", given_name)
 
-
+# main code
 problem_list = ""
 subdomain_name = ""
 extension = ".py"
-output_file_name = "solution_list.html"
+output_file_name = "solution_list.md" # Adjust this extension as needed
 
-# স্থায়ীভাবে এই ভ্যারিয়েবলটি যোগ করা হলো
-base_path = "Python/"
+base_path = "Python/" # Adjust this path as needed
 
+# read info file
 try:
     info_file = open(info_file_name, "r")
     info_file_lines = info_file.readlines()
@@ -33,12 +35,14 @@ except FileNotFoundError:
     print(f"error: '{info_file_name}' not found. please create the info file.")
     sys.exit()
 
+# create output file
 f = open(output_file_name, "w")
 f.write("\n")
 
+# process info file lines
 folder_count = 0
-
 i = 0
+# loop for serializing folders --- remove this if not needed
 while i < len(info_file_lines):
     line1 = info_file_lines[i].strip()
 
@@ -51,7 +55,7 @@ while i < len(info_file_lines):
             if line2.startswith("["):
                 problem_list = line2
 
-                # --- ফোল্ডার এবং ফাইলপাথ তৈরি ---
+                # increment folder count --- remove this if not needed
                 folder_count += 1
                 folder_serial = f'{folder_count:02d}'
 
@@ -60,26 +64,21 @@ while i < len(info_file_lines):
 
                 title_ar = re.findall(r'("[^"]*")', problem_list)
 
-                # HTML আউটপুট
+                # output --- will be changed as per requirement
                 f.write("\n\n- **" + subdomain_name + "**\n")
 
                 for idx, title in enumerate(title_ar):
-
                     file_serial = f'{(idx + 1):02d}'
                     filename_base = get_valid_name(title[1:-1])
-
                     filename_with_serial = f'{file_serial}_{filename_base}'
-
-                    # 🌟 পরিবর্তন: filepath এর শুরুতে base_path ("Python/") যোগ করা হয়েছে
                     filepath = base_path + folder_name + "/" + filename_with_serial + extension
-
-                    # HTML লিংক লেখা
                     f.write("   - [" + title[1:-1] + "](" + filepath + ")\n")
 
-                i += 2
+                i += 2 # skip next line as it's already processed
                 continue
 
-    i += 1
+    i += 1 # move to next line
 
+# finalize output file
 f.close()
 print("List generated successfully. Open " + output_file_name + " to view.")
