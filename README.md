@@ -20,7 +20,6 @@ Go to [Detailed Map](#detailed-map-to-the-repository) to find the solutions for 
  ### [Python:](https://github.com/sohayelmahmud/HackerRank-Solutions/tree/main/Python)
 
 
-
 - **Introduction**
    - [Say Hello, World! With Python](Python/01_Introduction/01_SayHelloWorldWithPython.py)
    - [Reading Raw Input](Python/01_Introduction/02_ReadingRawInput.py)

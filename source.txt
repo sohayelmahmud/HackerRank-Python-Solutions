@@ -1,0 +1,6 @@
+Problems --- from HackerRank
+Solutions -- Own, getting help from some github repo like (https://github.com/arsho/Hackerrank_Python_Domain_Solutions), (https://github.com/srgnk/HackerRank)
+
+Folder Creation file, Solution List creation file for md from (https://github.com/arsho) and modified by me.
+
+Thanks and respect to all of the originel author
